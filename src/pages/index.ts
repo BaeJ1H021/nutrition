@@ -1,1 +1,4 @@
-// 채워질 예정
+import HomePage from './HomePage';
+import SubPage from './SubPage';
+
+export { HomePage, SubPage };
