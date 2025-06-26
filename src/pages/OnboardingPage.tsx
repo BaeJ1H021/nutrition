@@ -46,7 +46,7 @@ const OnboardingPage = () => {
           <Dot key={idx} active={idx === step} />
         ))}
       </DotContainer>
-      <Illustration src={onboardingData[step].image} alt="onboarding" />
+      <Illustration src={onboardingData[step].image} alt={onboardingData[step].title} />
       <BoldText
         size={28}
         color={theme.color.gray.gray800}
