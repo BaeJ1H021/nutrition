@@ -1,4 +1,5 @@
 import HomePage from './HomePage';
 import SubPage from './SubPage';
+import OnboardingPage from './OnboardingPage';
 
-export { HomePage, SubPage };
+export { HomePage, SubPage, OnboardingPage };

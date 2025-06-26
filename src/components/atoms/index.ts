@@ -1,4 +1,4 @@
-// 채워질 예정
 import { LightText, RegularText, MediumText, BoldText } from './Text';
+import FlexBox from './FlexBox';
 
-export { LightText, RegularText, MediumText, BoldText };
+export { LightText, RegularText, MediumText, BoldText, FlexBox };
