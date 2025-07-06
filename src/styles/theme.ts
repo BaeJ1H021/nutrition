@@ -60,6 +60,12 @@ const bold10 = css`
   line-height: 1.3;
 `;
 
+const semibold16 = css`
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.3;
+`;
+
 const medium28 = css`
   font-size: 2.8rem;
   font-weight: 500;
@@ -167,6 +173,7 @@ const font = {
   bold14,
   bold12,
   bold10,
+  semibold16,
   medium28,
   medium24,
   medium20,

@@ -11,6 +11,7 @@ interface Font {
   bold14: RuleSet<object>;
   bold12: RuleSet<object>;
   bold10: RuleSet<object>;
+  semibold16: RuleSet<object>;
   medium28: RuleSet<object>;
   medium24: RuleSet<object>;
   medium20: RuleSet<object>;

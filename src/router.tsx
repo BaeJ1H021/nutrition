@@ -1,5 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage, OnboardingPage } from './pages';
+import {
+  HomePage,
+  OnboardingPage,
+  SignUpEmailPage,
+  SignUpPasswordPage,
+  SignUpVerifyPage,
+  WelcomePage,
+} from './pages';
 import { FullScreen } from './components/molecules';
 
 export const router = createBrowserRouter([
@@ -15,6 +22,22 @@ export const router = createBrowserRouter([
         path: '/onboarding',
         element: <OnboardingPage />,
         errorElement: <div>Unknown Error</div>,
+      },
+      {
+        path: '/signup/email',
+        element: <SignUpEmailPage />,
+      },
+      {
+        path: '/signup/password',
+        element: <SignUpPasswordPage />,
+      },
+      {
+        path: '/signup/verify',
+        element: <SignUpVerifyPage />,
+      },
+      {
+        path: '/welcome',
+        element: <WelcomePage />,
       },
     ],
   },
