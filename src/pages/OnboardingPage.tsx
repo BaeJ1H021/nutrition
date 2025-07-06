@@ -46,7 +46,7 @@ const OnboardingPage = () => {
           <Dot key={idx} active={idx === step} />
         ))}
       </DotContainer>
-      <Illustration src={onboardingData[step].image} alt={onboardingData[step].title} />
+      <Illustration src={onboardingData[step].image} alt="온보딩 일러스트" />
       <BoldText
         size={28}
         color={theme.color.gray.gray800}
@@ -108,7 +108,7 @@ const Illustration = styled.img`
 const MainButton = styled.button`
   width: 100%;
   background-color: ${({ theme }) => theme.color.brand.main};
-  ${({ theme }) => theme.font.medium14}
+  ${({ theme }) => theme.font.semibold16}
   color: white;
   height: 4.8rem;
   border-radius: 0.8rem;
@@ -118,7 +118,7 @@ const MainButton = styled.button`
 const SkipButton = styled.button`
   width: 100%;
   background-color: ${({ theme }) => theme.color.gray.gray50};
-  ${({ theme }) => theme.font.medium14}
+  ${({ theme }) => theme.font.semibold16}
   color: ${({ theme }) => theme.color.gray.gray400};
   height: 4.8rem;
   border-radius: 0.8rem;
