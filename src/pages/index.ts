@@ -5,6 +5,8 @@ import SignUpEmailPage from './SignUpEmailPage';
 import SignUpPasswordPage from './SignUpPasswordPage';
 import SignUpVerifyPage from './SignUpVerifyPage';
 import WelcomePage from './WelcomePage';
+import LoginPage from './LoginPage';
+import AuthCallbackPage from './AuthCallbackPage';
 
 export {
   HomePage,
@@ -14,4 +16,6 @@ export {
   SignUpPasswordPage,
   SignUpVerifyPage,
   WelcomePage,
+  LoginPage,
+  AuthCallbackPage,
 };
