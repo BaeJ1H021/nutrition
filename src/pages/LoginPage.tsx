@@ -19,7 +19,7 @@ const LoginPage = () => {
       email,
       password,
     });
-    console.log(error);
+    // Error logging removed to prevent exposing sensitive information.
     if (error) {
       setErrorMessage('*아이디 또는 비밀번호를 확인해주세요.');
       return;
