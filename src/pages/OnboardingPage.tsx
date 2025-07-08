@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { BoldText, FlexBox, RegularText } from '../components/atoms';
 import { theme } from '../styles/theme';
+import { useNavigate } from 'react-router-dom';
 
 const onboardingData = [
   {
@@ -24,19 +25,20 @@ const onboardingData = [
 const OnboardingPage = () => {
   const [step, setStep] = useState(0);
   const isLast = step === onboardingData.length - 1;
+  const navigate = useNavigate();
 
   const handleNext = () => {
     if (!isLast) {
       setStep(step + 1);
     } else {
       // 로그인 페이지 이동 예정
-      console.log('온보딩 완료!');
+      navigate('/login');
     }
   };
 
   const handleSkip = () => {
     // 로그인 페이지 이동 예정
-    console.log('건너뛰기!');
+    navigate('/login');
   };
 
   return (

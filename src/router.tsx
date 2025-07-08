@@ -1,6 +1,8 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import {
+  AuthCallbackPage,
   HomePage,
+  LoginPage,
   OnboardingPage,
   SignUpEmailPage,
   SignUpPasswordPage,
@@ -15,6 +17,10 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Navigate to="/onboarding" replace />,
+      },
+      {
+        path: '/home',
         element: <HomePage />,
         errorElement: <div>Unknown Error</div>,
       },
@@ -38,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: '/welcome',
         element: <WelcomePage />,
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/auth/callback',
+        element: <AuthCallbackPage />,
       },
     ],
   },

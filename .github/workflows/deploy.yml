@@ -30,6 +30,13 @@ jobs:
         run: |
           npm install
 
+      # 환경 변수 주입
+      - name: Create .env file
+        run: |
+          echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> .env
+          echo "VITE_SUPABASE_KEY=${{ secrets.VITE_SUPABASE_KEY }}" >> .env
+          echo "VITE_REDIRECT_URL=https://www.nutritioncorp.kr/auth/callback" >> .env.production
+
       # 빌드
       - name: Build project
         run: |
