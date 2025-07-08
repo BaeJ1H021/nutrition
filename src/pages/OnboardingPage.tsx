@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BoldText, FlexBox, RegularText } from '../components/atoms';
 import { theme } from '../styles/theme';
@@ -40,6 +40,13 @@ const OnboardingPage = () => {
     // 로그인 페이지 이동 예정
     navigate('/login');
   };
+
+  useEffect(() => {
+    onboardingData.forEach((data) => {
+      const img = new Image();
+      img.src = data.image;
+    });
+  }, []);
 
   return (
     <Container>
