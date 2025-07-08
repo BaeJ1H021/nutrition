@@ -66,18 +66,36 @@ const LoginPage = () => {
       />
       {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
       <CheckboxRow>
-        <label onClick={() => setAutoLogin(!autoLogin)}>
-          <CustomBox $checked={autoLogin}>
-            {autoLogin && <FaCheck size={12} color="#fff" />}
-          </CustomBox>
-          자동로그인
-        </label>
-        <label onClick={() => setSaveId(!saveId)}>
-          <CustomBox $checked={saveId}>
-            {saveId && <FaCheck size={12} color="#fff" />}
-          </CustomBox>
-          아이디 저장
-        </label>
+        <div>
+          <input
+            type="checkbox"
+            id="autoLogin"
+            checked={autoLogin}
+            onChange={() => setAutoLogin(!autoLogin)}
+            style={{ display: 'none' }}
+          />
+          <label htmlFor="autoLogin">
+            <CustomBox $checked={autoLogin}>
+              {autoLogin && <FaCheck size={12} color="#fff" />}
+            </CustomBox>
+            자동로그인
+          </label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            id="saveId"
+            checked={saveId}
+            onChange={() => setSaveId(!saveId)}
+            style={{ display: 'none' }}
+          />
+          <label htmlFor="saveId">
+            <CustomBox $checked={saveId}>
+              {saveId && <FaCheck size={12} color="#fff" />}
+            </CustomBox>
+            아이디 저장
+          </label>
+        </div>
       </CheckboxRow>
       <LoginButton disabled={!email || !password} onClick={handleLogin}>
         로그인
