@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> .env
           echo "VITE_SUPABASE_KEY=${{ secrets.VITE_SUPABASE_KEY }}" >> .env
-          echo "VITE_REDIRECT_URL=https://www.nutritioncorp.kr/auth/callback" >> .env.production
+          echo "VITE_REDIRECT_URL=https://www.nutritioncorp.kr/auth/callback" >> .env
 
       # 빌드
       - name: Build project
