@@ -30,10 +30,15 @@ const LoginPage = () => {
   };
 
   const handleKakaoLogin = async () => {
+    const redirectTo =
+      import.meta.env.MODE === 'development'
+        ? 'http://localhost:5173/auth/callback'
+        : 'https://www.nutritioncorp.kr/auth/callback';
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: import.meta.env.VITE_REDIRECT_URL,
+        redirectTo: redirectTo,
       },
     });
     if (error) alert('카카오 로그인 실패: ' + error.message);
