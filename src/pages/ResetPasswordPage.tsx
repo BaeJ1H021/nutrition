@@ -12,7 +12,7 @@ const ResetPasswordPage = () => {
     setIsLoading(true);
 
     const res = await fetch(
-      'https://qpftupbuhjmkksxkivwi.supabase.co/functions/v1/reset-password',
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/reset-password`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
