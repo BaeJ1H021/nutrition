@@ -7,6 +7,7 @@ import SignUpVerifyPage from './SignUpVerifyPage';
 import WelcomePage from './WelcomePage';
 import LoginPage from './LoginPage';
 import AuthCallbackPage from './AuthCallbackPage';
+import ResetPasswordPage from './ResetPasswordPage';
 
 export {
   HomePage,
@@ -18,4 +19,5 @@ export {
   WelcomePage,
   LoginPage,
   AuthCallbackPage,
+  ResetPasswordPage,
 };
