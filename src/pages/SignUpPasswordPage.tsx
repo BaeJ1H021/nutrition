@@ -5,8 +5,9 @@ import { supabase } from '../apis';
 import { FaCheck } from 'react-icons/fa';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import { User } from '@supabase/supabase-js';
-import { BoldText } from '../components/atoms';
+import { BoldText, CustomButton } from '../components/atoms';
 import { theme } from '../styles/theme';
+import { InputField, StyledIconButton } from '../components/molecules';
 
 const SignUpPasswordPage = () => {
   const navigate = useNavigate();
@@ -61,24 +62,27 @@ const SignUpPasswordPage = () => {
         <br />
         비밀번호를 설정해 주세요.
       </BoldText>
-      <Label>비밀번호</Label>
+
       <InputWrapper>
-        <InputContainer>
-          <Input
-            type={passwordVisible ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="8자 이상, 영문/숫자/특수문자 조합"
-            $isValid={password === '' || isValid}
-          />
-          <IconButton onClick={() => setPasswordVisible(!passwordVisible)}>
+        <InputField
+          marginBottom="0rem"
+          label="비밀번호"
+          type={passwordVisible ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="8자 이상, 영문/숫자/특수문자 조합"
+          isValid={password === '' || isValid}
+        >
+          <StyledIconButton
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
             {passwordVisible ? (
-              <IoEyeOffOutline color={theme.color.gray.gray300} size={20} />
+              <IoEyeOffOutline size={20} color={theme.color.gray.gray300} />
             ) : (
-              <IoEyeOutline color={theme.color.gray.gray300} size={20} />
+              <IoEyeOutline size={20} color={theme.color.gray.gray300} />
             )}
-          </IconButton>
-        </InputContainer>
+          </StyledIconButton>
+        </InputField>
         {password && (
           <Message $isValid={isValid}>
             {isValid ? (
@@ -92,24 +96,25 @@ const SignUpPasswordPage = () => {
           </Message>
         )}
       </InputWrapper>
-      <Label>비밀번호 확인</Label>
       <InputWrapper>
-        <InputContainer>
-          <Input
-            type={confirmVisible ? 'text' : 'password'}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="비밀번호를 입력하세요"
-            $isValid={confirmPassword === '' || isMatch}
-          />
-          <IconButton onClick={() => setConfirmVisible(!confirmVisible)}>
+        <InputField
+          marginBottom="0rem"
+          label="비밀번호 확인"
+          type={confirmVisible ? 'text' : 'password'}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="비밀번호를 입력하세요"
+          isValid={confirmPassword === '' || isMatch}
+        >
+          <StyledIconButton onClick={() => setConfirmVisible(!confirmVisible)}>
             {confirmVisible ? (
-              <IoEyeOffOutline color={theme.color.gray.gray300} size={20} />
+              <IoEyeOffOutline size={20} color={theme.color.gray.gray300} />
             ) : (
-              <IoEyeOutline color={theme.color.gray.gray300} size={20} />
+              <IoEyeOutline size={20} color={theme.color.gray.gray300} />
             )}
-          </IconButton>
-        </InputContainer>
+          </StyledIconButton>
+        </InputField>
+
         {confirmPassword && !isMatch && (
           <Message $isValid={false}>*비밀번호가 일치하지 않습니다.</Message>
         )}
@@ -122,9 +127,14 @@ const SignUpPasswordPage = () => {
           </Message>
         )}
       </InputWrapper>
-      <SubmitButton onClick={handleSubmit} disabled={!isValid || !isMatch}>
+      <CustomButton
+        onClick={handleSubmit}
+        disabled={!isValid || !isMatch}
+        variant="primary"
+        marginTop="auto"
+      >
         완료
-      </SubmitButton>
+      </CustomButton>
     </Container>
   );
 };
@@ -139,43 +149,8 @@ const Container = styled.div`
   background-color: #ffffff;
 `;
 
-const Label = styled.label`
-  display: block;
-  ${({ theme }) => theme.font.bold14}
-  color: ${theme.color.brand.main};
-  margin-bottom: 0.8rem;
-`;
-
 const InputWrapper = styled.div`
   margin-bottom: 1.6rem;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-`;
-
-const Input = styled.input<{ $isValid: boolean }>`
-  width: 100%;
-  padding: 1.1rem 1.4rem;
-  ${({ theme }) => theme.font.regular16}
-  border: 1px solid
-    ${({ $isValid, theme }) =>
-    $isValid ? theme.color.gray.gray200 : theme.color.semantic.error};
-  border-radius: 0.8rem;
-  &:focus {
-    border-color: ${theme.color.brand.main};
-  }
-`;
-
-const IconButton = styled.button`
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Message = styled.p<{ $isValid: boolean }>`
@@ -189,15 +164,4 @@ const ValidRow = styled.span`
   display: flex;
   align-items: center;
   gap: 0.4rem;
-`;
-
-const SubmitButton = styled.button<{ disabled?: boolean }>`
-  margin-top: auto;
-  width: 100%;
-  height: 4.8rem;
-  border-radius: 0.8rem;
-  ${({ theme }) => theme.font.semibold16}
-  color: ${({ disabled }) => (disabled ? theme.color.gray.gray400 : '#fff')};
-  background-color: ${({ disabled }) =>
-    disabled ? theme.color.gray.gray50 : theme.color.brand.main};
 `;

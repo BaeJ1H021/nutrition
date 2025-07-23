@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { BoldText } from '../components/atoms';
+import { BoldText, CustomButton } from '../components/atoms';
 import { theme } from '../styles/theme';
 import { useNavigate } from 'react-router-dom';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { supabase } from '../apis';
+import { StyledIconButton, InputField } from '../components/molecules';
 
 const SignUpEmailPage = () => {
   const [email, setEmail] = useState('');
@@ -50,29 +51,31 @@ const SignUpEmailPage = () => {
         <br />
         맞춤 추천을 받아보세요
       </BoldText>
-      <Label>이메일</Label>
-      <InputWrapper>
-        <InputContainer>
-          <Input
-            type="email"
-            placeholder="이메일을 입력해주세요"
-            value={email}
-            onChange={handleChange}
-            $isValid={email === '' || isValid}
-          />
-          {email && (
-            <IconButton onClick={handleClear}>
-              <IoIosCloseCircle size={20} color={theme.color.gray.gray300} />
-            </IconButton>
-          )}
-        </InputContainer>
-        {email !== '' && !isValid && (
-          <ErrorText>*잘못된 유형의 이메일 주소입니다.</ErrorText>
+      <InputField
+        label="이메일"
+        type="email"
+        value={email}
+        onChange={handleChange}
+        placeholder="이메일을 입력해주세요"
+        isValid={email === '' || isValid}
+        helperMessage={
+          email !== '' && !isValid ? '*잘못된 유형의 이메일 주소입니다.' : ''
+        }
+      >
+        {email && (
+          <StyledIconButton onClick={handleClear}>
+            <IoIosCloseCircle size={20} color={theme.color.gray.gray300} />
+          </StyledIconButton>
         )}
-      </InputWrapper>
-      <SubmitButton disabled={!email || !isValid} onClick={handleSendCode}>
+      </InputField>
+      <CustomButton
+        onClick={handleSendCode}
+        variant="primary"
+        disabled={!email || !isValid}
+        marginTop="auto"
+      >
         인증번호 발송하기
-      </SubmitButton>
+      </CustomButton>
     </Container>
   );
 };
@@ -85,60 +88,4 @@ const Container = styled.section`
   min-height: 100vh;
   padding: 3.4rem 1.4rem;
   background-color: #ffffff;
-`;
-
-const Label = styled.label`
-  display: block;
-  ${({ theme }) => theme.font.bold14}
-  color: ${theme.color.brand.main};
-  margin-bottom: 0.8rem;
-`;
-
-const InputWrapper = styled.div`
-  margin-bottom: 13.3rem;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-`;
-
-const Input = styled.input<{ $isValid: boolean }>`
-  width: 100%;
-  padding: 1.1rem 1.4rem;
-  ${({ theme }) => theme.font.regular16}
-  border: 1px solid
-    ${({ $isValid, theme }) =>
-    $isValid ? theme.color.gray.gray200 : theme.color.semantic.error};
-  border-radius: 0.8rem;
-  &:focus {
-    border-color: ${theme.color.brand.main};
-  }
-`;
-
-const IconButton = styled.button`
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ErrorText = styled.p`
-  color: ${theme.color.semantic.error};
-  ${({ theme }) => theme.font.regular12}
-  margin-top: 0.8rem;
-`;
-
-const SubmitButton = styled.button<{ disabled?: boolean }>`
-  width: 100%;
-  height: 4.8rem;
-  margin-top: auto;
-  border-radius: 0.8rem;
-  ${({ theme }) => theme.font.semibold16}
-  color: ${({ disabled }) => (disabled ? theme.color.gray.gray400 : '#fff')};
-  background-color: ${({ disabled }) =>
-    disabled ? theme.color.gray.gray50 : theme.color.brand.main};
 `;

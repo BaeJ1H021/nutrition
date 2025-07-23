@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BoldText, FlexBox, RegularText } from '../components/atoms';
+import {
+  BoldText,
+  CustomButton,
+  FlexBox,
+  RegularText,
+} from '../components/atoms';
 import { theme } from '../styles/theme';
 import { useNavigate } from 'react-router-dom';
 
@@ -71,10 +76,16 @@ const OnboardingPage = () => {
         {onboardingData[step].description}
       </RegularText>
       <FlexBox col fullWidth>
-        <MainButton onClick={handleNext}>
+        <CustomButton
+          onClick={handleNext}
+          variant="primary"
+          marginBottom="0.8rem"
+        >
           {isLast ? '시작하기' : '다음'}
-        </MainButton>
-        <SkipButton onClick={handleSkip}>건너뛰기</SkipButton>
+        </CustomButton>
+        <CustomButton onClick={handleSkip} variant="disabled">
+          건너뛰기
+        </CustomButton>
       </FlexBox>
     </Container>
   );
@@ -112,23 +123,4 @@ const Illustration = styled.img`
   width: 228px;
   height: 256px;
   object-fit: contain;
-`;
-
-const MainButton = styled.button`
-  width: 100%;
-  background-color: ${({ theme }) => theme.color.brand.main};
-  ${({ theme }) => theme.font.semibold16}
-  color: white;
-  height: 4.8rem;
-  border-radius: 0.8rem;
-  margin-bottom: 0.8rem;
-`;
-
-const SkipButton = styled.button`
-  width: 100%;
-  background-color: ${({ theme }) => theme.color.gray.gray50};
-  ${({ theme }) => theme.font.semibold16}
-  color: ${({ theme }) => theme.color.gray.gray400};
-  height: 4.8rem;
-  border-radius: 0.8rem;
 `;

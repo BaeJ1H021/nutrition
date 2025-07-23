@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { BoldText, RegularText } from '../components/atoms';
+import { BoldText, CustomButton, RegularText } from '../components/atoms';
 import { theme } from '../styles/theme';
 
 const WelcomePage = () => {
@@ -16,15 +16,19 @@ const WelcomePage = () => {
       >
         환영합니다!
       </BoldText>
-      <RegularText size={18} color={theme.color.gray.gray500}>
+      <RegularText
+        size={18}
+        color={theme.color.gray.gray500}
+        style={{ textAlign: 'center' }}
+      >
         프로필을 생성하여 뉴트리션과 함께하는
         <br />
         건강한 여정을 시작해보세요
       </RegularText>
       <ButtonWrapper>
-        <LoginButton onClick={() => navigate('/login')}>
+        <CustomButton onClick={() => navigate('/login')} variant="primary">
           로그인 하기
-        </LoginButton>
+        </CustomButton>
       </ButtonWrapper>
     </Container>
   );
@@ -52,13 +56,4 @@ const ButtonWrapper = styled.div`
   width: 100%;
   gap: 1.1rem;
   margin-top: auto;
-`;
-
-const LoginButton = styled.button`
-  width: 100%;
-  height: 4.8rem;
-  border-radius: 0.8rem;
-  background-color: ${theme.color.brand.main};
-  color: #fff;
-  ${({ theme }) => theme.font.semibold16};
 `;

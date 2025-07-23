@@ -2,9 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../apis';
-import { BoldText } from '../components/atoms';
+import { BoldText, CustomButton } from '../components/atoms';
 import { theme } from '../styles/theme';
 import { FaCheck } from 'react-icons/fa';
+import { InputField, StyledIconButton } from '../components/molecules';
+import { IoIosCloseCircle } from 'react-icons/io';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,6 +16,7 @@ const LoginPage = () => {
   const [autoLogin, setAutoLogin] = useState(false);
   const [saveId, setSaveId] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithPassword({
@@ -55,21 +59,41 @@ const LoginPage = () => {
         <br />
         건강한 시작을 해보세요
       </BoldText>
-      <Input
+      <InputField
+        marginBottom="0.8rem"
         type="email"
-        placeholder="이메일"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        $isError={!!errorMessage}
-      />
-      <Input
-        type="password"
-        placeholder="비밀번호(8자 이상, 영문/숫자/특수문자 조합)"
+        placeholder="이메일"
+        isValid={!errorMessage}
+      >
+        {email && (
+          <StyledIconButton onClick={() => setEmail('')}>
+            <IoIosCloseCircle size={20} color={theme.color.gray.gray300} />
+          </StyledIconButton>
+        )}
+      </InputField>
+      <InputField
+        type={passwordVisible ? 'text' : 'password'}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        $isError={!!errorMessage}
-      />
-      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+        placeholder="비밀번호(8자 이상, 영문/숫자/특수문자 조합)"
+        isValid={!errorMessage}
+        helperMessage={errorMessage}
+        marginBottom="0.8rem"
+      >
+        {password && (
+          <StyledIconButton
+            onClick={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? (
+              <IoEyeOffOutline color={theme.color.gray.gray300} size={20} />
+            ) : (
+              <IoEyeOutline color={theme.color.gray.gray300} size={20} />
+            )}
+          </StyledIconButton>
+        )}
+      </InputField>
       <CheckboxRow>
         <div>
           <input
@@ -105,9 +129,13 @@ const LoginPage = () => {
       <LoginButton disabled={!email || !password} onClick={handleLogin}>
         로그인
       </LoginButton>
-      <SignUpButton onClick={() => navigate('/signup/email')}>
+      <CustomButton
+        onClick={() => navigate('/signup/email')}
+        variant="secondary"
+        marginBottom="2.2rem"
+      >
         회원가입
-      </SignUpButton>
+      </CustomButton>
       <TextButton onClick={() => navigate('/reset-password')}>
         비밀번호를 잊으셨나요?
       </TextButton>
@@ -128,23 +156,6 @@ const Container = styled.section`
   min-height: 100vh;
   padding: 3.4rem 1.4rem;
   background-color: #ffffff;
-`;
-
-const Input = styled.input<{ $isError?: boolean }>`
-  padding: 1.1rem 1.4rem;
-  border: 1px solid
-    ${({ $isError, theme }) =>
-      $isError ? theme.color.semantic.error : theme.color.gray.gray100};
-  border-radius: 0.8rem;
-  margin-bottom: 0.8rem;
-  ${({ theme }) => theme.font.regular16};
-  color: ${theme.color.gray.gray800};
-`;
-
-const ErrorText = styled.p`
-  color: ${theme.color.semantic.error};
-  ${({ theme }) => theme.font.regular12};
-  margin-top: 0.8rem;
 `;
 
 const CheckboxRow = styled.div`
@@ -170,17 +181,6 @@ const LoginButton = styled.button`
   border-radius: 0.8rem;
   ${({ theme }) => theme.font.semibold16};
   margin-bottom: 0.8rem;
-`;
-
-const SignUpButton = styled.button`
-  width: 100%;
-  height: 4.8rem;
-  background-color: white;
-  color: ${theme.color.gray.gray600};
-  border: 1px solid ${theme.color.gray.gray100};
-  border-radius: 0.8rem;
-  ${({ theme }) => theme.font.semibold16};
-  margin-bottom: 2.2rem;
 `;
 
 const TextButton = styled.button`

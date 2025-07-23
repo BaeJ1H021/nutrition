@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { BoldText, FlexBox, RegularText } from '../components/atoms';
+import {
+  BoldText,
+  CustomButton,
+  FlexBox,
+  RegularText,
+} from '../components/atoms';
 import { theme } from '../styles/theme';
+import { InputField, StyledIconButton } from '../components/molecules';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const isValid = email === '' || /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(email);
 
   const handleReset = async () => {
     setIsLoading(true);
@@ -30,6 +39,10 @@ const ResetPasswordPage = () => {
     } else {
       setToastMessage('메일을 발송했습니다!');
     }
+  };
+
+  const handleClear = () => {
+    setEmail('');
   };
 
   useEffect(() => {
@@ -56,23 +69,35 @@ const ResetPasswordPage = () => {
       >
         이메일 주소로 임시 비밀번호를 보내드려요.
       </RegularText>
-      <Label>이메일</Label>
-      <Input
+      <InputField
+        label="이메일"
         type="email"
-        placeholder="이메일을 입력해주세요"
         value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-      />
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="이메일을 입력해주세요"
+        isValid={isValid}
+        helperMessage={
+          email !== '' && !isValid ? '*잘못된 유형의 이메일 주소입니다.' : ''
+        }
+      >
+        {email && (
+          <StyledIconButton onClick={handleClear}>
+            <IoIosCloseCircle size={20} color={theme.color.gray.gray300} />
+          </StyledIconButton>
+        )}
+      </InputField>
       <FlexBox col fullWidth gap="0.8rem" style={{ marginTop: 'auto' }}>
         {toastMessage && <Toast>{toastMessage}</Toast>}
-        <Button disabled={!email || isLoading} onClick={handleReset}>
+        <CustomButton
+          onClick={handleReset}
+          disabled={!email || !isValid || isLoading}
+          variant="primary"
+        >
           새로운 비밀번호 전송
-        </Button>
-        <ReturnLoginButton onClick={() => history.back()}>
+        </CustomButton>
+        <CustomButton onClick={() => history.back()} variant="secondary">
           로그인으로 돌아가기
-        </ReturnLoginButton>
+        </CustomButton>
       </FlexBox>
     </Container>
   );
@@ -85,45 +110,6 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-`;
-
-const Label = styled.label`
-  display: block;
-  ${({ theme }) => theme.font.bold14}
-  color: ${theme.color.brand.main};
-  margin-bottom: 0.8rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 1.1rem 1.4rem;
-  ${({ theme }) => theme.font.regular16}
-  border: 1px solid
-    ${({ theme }) => theme.color.gray.gray200};
-  border-radius: 0.8rem;
-  &:focus {
-    border-color: ${theme.color.brand.main};
-  }
-`;
-
-const Button = styled.button<{ disabled?: boolean }>`
-  width: 100%;
-  height: 4.8rem;
-  border-radius: 0.8rem;
-  background-color: ${({ disabled, theme }) =>
-    disabled ? theme.color.gray.gray50 : theme.color.brand.main};
-  color: ${({ disabled, theme }) =>
-    disabled ? theme.color.gray.gray400 : 'white'};
-  ${({ theme }) => theme.font.semibold16};
-`;
-
-const ReturnLoginButton = styled.button`
-  width: 100%;
-  height: 4.8rem;
-  border-radius: 0.8rem;
-  ${({ theme }) => theme.font.semibold16}
-  color: ${({ theme }) => theme.color.gray.gray200};
-  border: 1px solid ${({ theme }) => theme.color.gray.gray100};
 `;
 
 const Toast = styled.div`
