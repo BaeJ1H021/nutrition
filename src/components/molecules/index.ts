@@ -1,3 +1,5 @@
 import FullScreen from './FullScreen';
+import InputField from './InputField';
+import { StyledIconButton } from './InputField';
 
-export { FullScreen };
+export { FullScreen, InputField, StyledIconButton };
