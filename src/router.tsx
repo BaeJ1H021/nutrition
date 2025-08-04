@@ -4,6 +4,10 @@ import {
   HomePage,
   LoginPage,
   OnboardingPage,
+  ProfileBirthdayPage,
+  ProfileBodyPage,
+  ProfileEndPage,
+  ProfileGenderPage,
   ResetPasswordPage,
   SignUpEmailPage,
   SignUpPasswordPage,
@@ -57,6 +61,22 @@ export const router = createBrowserRouter([
       {
         path: '/reset-password',
         element: <ResetPasswordPage />,
+      },
+      {
+        path: '/profile/gender',
+        element: <ProfileGenderPage />,
+      },
+      {
+        path: '/profile/birthday',
+        element: <ProfileBirthdayPage />,
+      },
+      {
+        path: '/profile/body',
+        element: <ProfileBodyPage />,
+      },
+      {
+        path: '/profile/end',
+        element: <ProfileEndPage />,
       },
     ],
   },

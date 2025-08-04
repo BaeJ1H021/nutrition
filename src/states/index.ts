@@ -1,1 +1,3 @@
-// 채워질 예정
+import { useProfileStore } from './ProfileStore';
+
+export { useProfileStore };

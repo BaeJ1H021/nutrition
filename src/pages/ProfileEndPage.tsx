@@ -3,38 +3,41 @@ import styled from 'styled-components';
 import { BoldText, CustomButton, RegularText } from '../components/atoms';
 import { theme } from '../styles/theme';
 
-const WelcomePage = () => {
+const ProfileEndPage = () => {
   const navigate = useNavigate();
 
   return (
     <Container>
-      <Image src="/images/welcome.png" alt="환영 일러스트" />
+      <Image src="/images/profile_end.png" alt="웃으며 축하해주는 일러스트" />
       <BoldText
         size={28}
         color={theme.color.brand.main}
-        style={{ marginBottom: '1.4rem' }}
+        style={{ marginBottom: '1.4rem', marginTop: '8.2rem' }}
       >
-        환영합니다!
+        모든 준비가 완료되었어요
       </BoldText>
       <RegularText
         size={18}
         color={theme.color.gray.gray500}
         style={{ textAlign: 'center' }}
       >
-        프로필을 생성하여 뉴트리션과 함께하는
+        이제 개인 맞춤
         <br />
-        건강한 여정을 시작해보세요
+        영양 추천을 받아보세요
       </RegularText>
       <ButtonWrapper>
         <CustomButton onClick={() => navigate('/login')} variant="primary">
-          로그인 하기
+          첫 일정 등록하기
+        </CustomButton>
+        <CustomButton onClick={() => navigate('/home')} variant="disabled">
+          건너뛰기
         </CustomButton>
       </ButtonWrapper>
     </Container>
   );
 };
 
-export default WelcomePage;
+export default ProfileEndPage;
 
 const Container = styled.section`
   display: flex;
@@ -46,8 +49,8 @@ const Container = styled.section`
 `;
 
 const Image = styled.img`
-  width: 294px;
-  height: 333px;
+  width: 228px;
+  height: 256px;
 `;
 
 const ButtonWrapper = styled.div`
