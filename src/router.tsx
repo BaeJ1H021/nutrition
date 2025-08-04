@@ -4,6 +4,7 @@ import {
   HomePage,
   LoginPage,
   OnboardingPage,
+  ProfileBirthdayPage,
   ProfileGenderPage,
   ResetPasswordPage,
   SignUpEmailPage,
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: '/profile/gender',
         element: <ProfileGenderPage />,
+      },
+      {
+        path: '/profile/birthday',
+        element: <ProfileBirthdayPage />,
       },
     ],
   },
