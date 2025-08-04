@@ -10,6 +10,8 @@ import AuthCallbackPage from './AuthCallbackPage';
 import ResetPasswordPage from './ResetPasswordPage';
 import ProfileGenderPage from './ProfileGenderPage';
 import ProfileBirthdayPage from './ProfileBirthdayPage';
+import ProfileBodyPage from './ProfileBodyPage';
+import ProfileEndPage from './ProfileEndPage';
 
 export {
   HomePage,
@@ -24,4 +26,6 @@ export {
   ResetPasswordPage,
   ProfileGenderPage,
   ProfileBirthdayPage,
+  ProfileBodyPage,
+  ProfileEndPage,
 };

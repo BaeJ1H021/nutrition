@@ -33,7 +33,7 @@ const ProfileBirthdayPage = () => {
   const handleNext = () => {
     if (!isValidDate()) return;
     setBirthday(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
-    navigate('/profile/height'); // 다음 페이지로 이동
+    navigate('/profile/body'); // 다음 페이지로 이동
   };
 
   return (
