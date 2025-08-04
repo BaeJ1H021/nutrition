@@ -8,6 +8,7 @@ import WelcomePage from './WelcomePage';
 import LoginPage from './LoginPage';
 import AuthCallbackPage from './AuthCallbackPage';
 import ResetPasswordPage from './ResetPasswordPage';
+import ProfileGenderPage from './ProfileGenderPage';
 
 export {
   HomePage,
@@ -20,4 +21,5 @@ export {
   LoginPage,
   AuthCallbackPage,
   ResetPasswordPage,
+  ProfileGenderPage,
 };
