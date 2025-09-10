@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import {
   AuthCallbackPage,
+  CalendarPage,
   HomePage,
   LoginPage,
   OnboardingPage,
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: '/profile/end',
         element: <ProfileEndPage />,
+      },
+      {
+        path: '/calendar',
+        element: <CalendarPage />,
       },
     ],
   },
