@@ -12,6 +12,7 @@ import ProfileGenderPage from './ProfileGenderPage';
 import ProfileBirthdayPage from './ProfileBirthdayPage';
 import ProfileBodyPage from './ProfileBodyPage';
 import ProfileEndPage from './ProfileEndPage';
+import CalendarPage from './CalendarPage';
 
 export {
   HomePage,
@@ -28,4 +29,5 @@ export {
   ProfileBirthdayPage,
   ProfileBodyPage,
   ProfileEndPage,
+  CalendarPage,
 };

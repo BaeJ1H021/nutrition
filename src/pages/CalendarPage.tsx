@@ -2,13 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BottomNav } from '../components/molecules';
-import TodayScheduleCard, {
-  ScheduleItem,
-} from '../components/organisms/TodayScheduleCard';
 import { Calendar } from '../components/organisms';
+import { theme } from '../styles/theme';
+import { MediumText } from '../components/atoms';
 
 /** ---- Mock schedules ---- */
-const mockSchedules: ScheduleItem[] = [
+const mockSchedules = [
   {
     id: '1',
     title: '전해질 보충제',
@@ -25,26 +24,30 @@ const mockSchedules: ScheduleItem[] = [
   { id: '6', title: '비타민F', dates: ['2025-09-10'] },
 ];
 
-const HomePage: React.FC = () => {
+const LargeCalendar = styled(Calendar)`
+  --cell-vpad: 10px; /* 셀 높이 늘리기 */
+  --row-gap: 10px; /* 행 간격 늘리기 */
+`;
+
+const CalendarPage: React.FC = () => {
   const navigate = useNavigate();
   const [viewDate, setViewDate] = useState<Date>(new Date());
-  const today = new Date(); // 실제 오늘
+  const today = new Date();
 
   return (
     <Container>
-      <LogoRow>
-        <img src="/images/Nutrition.png" alt="Nutrition" />
-      </LogoRow>
+      {/* 상단 헤더 */}
+      <Header>
+        <MediumText size={16} color={theme.color.gray.gray800}>
+          캘린더
+        </MediumText>
+        <AddButton onClick={() => navigate('/schedule/add')}>
+          일정추가
+        </AddButton>
+      </Header>
 
-      {/* 오늘 일정 카드 (최대 2개 + '외 n개') */}
-      <TodayScheduleCard
-        today={today}
-        schedules={mockSchedules}
-        onMoreClick={() => navigate('/schedule')}
-      />
-
-      {/* 캘린더 (기존 그대로) */}
-      <Calendar
+      {/* 캘린더 */}
+      <LargeCalendar
         viewDate={viewDate}
         today={today}
         schedules={mockSchedules}
@@ -60,22 +63,47 @@ const HomePage: React.FC = () => {
         }
       />
 
+      {/* 오늘 일정 보기 버튼 */}
+      <TodayButton onClick={() => navigate('/today')}>
+        오늘 일정 보기
+      </TodayButton>
+
+      {/* 하단 네비게이션 */}
       <BottomNav />
     </Container>
   );
 };
 
-export default HomePage;
+export default CalendarPage;
 
 /* ---------- styles ---------- */
 const Container = styled.section`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 1.6rem 1.4rem 8rem;
+  padding: 0 1.4rem 8rem;
   background: #fff;
 `;
 
-const LogoRow = styled.div`
-  margin-bottom: 2.6rem;
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.6rem 0 2rem;
+`;
+
+const AddButton = styled.button`
+  ${theme.font.medium16}
+  color: ${theme.color.gray.gray800};
+`;
+
+const TodayButton = styled.button`
+  ${theme.font.semibold16}
+  width: 40%;
+  padding: 0.8rem 2rem;
+  margin-top: 2.6rem;
+  border-radius: 0.6rem;
+  color: #fff;
+  background: ${theme.color.brand.main};
+  align-self: center;
 `;
